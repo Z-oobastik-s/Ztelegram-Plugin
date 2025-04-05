@@ -1,0 +1,188 @@
+# ZTelegram Configuration
+# Version 1.0
+
+# Примечание: Используйте \n для переноса строки в сообщениях
+# Пример: "Первая строка\nВторая строка"
+#
+# Поддерживаются градиенты и MiniMessage форматирование во всех сообщениях:
+# <gradient:#FF0000:#A6EB0F>Текст в градиенте</gradient>
+# <#FF0000>Текст HEX цветом</color>
+# <red>Красный текст</red>, <blue>Синий текст</blue>
+# <hover:show_text:"Подсказка">Текст с подсказкой</hover> - (работает только в игре)
+# <bold>Жирный текст</bold>, <italic>Курсив</italic>
+#
+# Для Telegram поддерживается форматирование Markdown:
+# **Текст** - жирный текст
+# *Текст* - курсив
+# __Текст__ - подчеркнутый
+# ~~Текст~~ - зачеркнутый
+# ```Текст``` - моноширинный шрифт (код)
+
+# Bot settings
+bot:
+  # Your Telegram bot token from @BotFather (Required)
+  token: '5308757845:AAFrjAzcpi9TRsY8C7hy8tSL3bkBEw12-zs'
+
+# Channel IDs (chatId)
+channels:
+  # Main channel with two-way chat
+  main: '-1002111043217'
+  # Console channel for command logging and execution
+  console: '-1002656200279'
+  # Registration channel for players
+  register: '-1002611802353'
+
+# Main channel settings
+main-channel:
+  # Enable/disable main channel functionality
+  enabled: true
+  # Enable/disable chat synchronization
+  chat-enabled: true
+  # Format for messages from Telegram to Minecraft
+  # Поддерживаются цветовые коды &, §, MiniMessage и градиенты
+  format-telegram-to-minecraft: '<gradient:#FF0000:#A6EB0F>〔Телеграм〕</gradient>&d%player%: &f%message%'
+  # Format for messages from Minecraft to Telegram
+  format-minecraft-to-telegram: '✉️ %player% ➟ %message%'
+
+# Console channel settings
+console-channel:
+  # Enable/disable console channel functionality
+  enabled: true
+  # Player command logging settings
+  player-command-log:
+    # Enable/disable player command logging
+    enabled: true
+    # Format for command logs
+    format: 'Время: %time% \n%player%: /%command%'
+  # Console command feedback settings
+  command-feedback:
+    # Enable/disable command execution feedback
+    enabled: true
+    # Format for successful command execution
+    success: '✅ Команда успешно отправлена!\n✏️ Команда: /%command%'
+    # Format for failed command execution
+    error: '❌ Команда не выполнена: %command%\nОшибка: %error%'
+
+# Register channel settings
+register-channel:
+  # Enable/disable register channel functionality
+  enabled: true
+  # Message for invalid usernames
+  invalid-username: '❌ Неверный никнейм: %player%'
+  # Message for already registered players
+  already-registered: '❌ Никнейм %player% уже зарегистрирован\n❤️ Айпи сервера: Zoobastiks.20tps.name'
+  # Message for offline players
+  player-offline: '❌ Игрок %player% не в сети\n❌ Зайдите на сервер под этим никнеймом\n✅ И повторите попытку еще раз.'
+  # Message for successful registration
+  success: '✅ Ваш ник %player% зарегистрирован.\n🎁 Награда: 50 монет\n♻️ Награда: Полунена\n🔥 Айпи сервера Zoobastiks.20tps.name'
+  # Message sent to player in-game after successful registration
+  # Поддерживаются цветовые коды &, §, MiniMessage и градиенты
+  success-in-game: '<gradient:#FF0000:#A6EB0F>〔Телеграм〕</gradient> <hover:show_text:"Аккаунт привязан к Telegram"><gradient:#A6EB0F:#00FF00>Ваш аккаунт успешно привязан!</gradient></hover>\n<gradient:#FF0000:#A6EB0F>〔Телеграм〕</gradient> <hover:show_text:"Аккаунт привязан к Telegram"><gradient:#A6EB0F:#00FF00>Вы получили 50 монет на баланс</gradient></hover> '
+  # Deprecated: используйте reward-commands вместо этого
+  bonus: 50
+  # Список команд для выполнения при регистрации игрока
+  # %player% заменяется на никнейм игрока
+  reward-commands:
+    - 'eco give %player% 50'
+    - 'broadcast <gradient:#FF0000:#A6EB0F>%player%</gradient> <green>зарегистрировал свой аккаунт в Telegram!</green>'
+
+# Server and player events
+events:
+  # Server start event
+  server-start:
+    enabled: true
+    message: '✅ Сервер включен'
+  # Server stop event
+  server-stop:
+    enabled: true
+    message: '❌ Сервер выключен'
+  # Player join event
+  player-join:
+    enabled: true
+    message: '♿️ %player% зашел на сервер.'
+  # Player quit event
+  player-quit:
+    enabled: true
+    message: '🚼 %player% вышел с сервера.'
+  # Player death event
+  player-death:
+    enabled: true
+    message: '☠︎ %player% умер от %death_message%.'
+  # Player chat event
+  player-chat:
+    enabled: true
+
+# Telegram commands
+commands:
+  # Online command
+  online:
+    enabled: true
+    response: '🌍 Онлайн: %online%/%max%\n👫 Список игроков: %players%\n🖥 Айпи сервера: Zoobastiks.20tps.name'
+  # TPS command
+  tps:
+    enabled: true
+    response: '🛠 Тпс: %tps%'
+  # Restart command
+  restart:
+    enabled: true
+    response: '⚠️ Сервер перезагружается...'
+  # Gender command
+  gender:
+    enabled: true
+    usage: '❌ Используйте: /gender [man/girl]'
+    no-player: '❌ Сначала вам необходимо зарегистрировать свой никнейм!'
+    response: '✅ Пол для %player% установлен на %gender%'
+    translations:
+      man: 'Мужчина'
+      girl: 'Женщина'
+  # Player command
+  player:
+    enabled: true
+    usage: 'Usage: /player <nickname>'
+    no_player: 'Player %player% not found'
+    response: |
+      Player: %player%
+      Online: %online%
+      Health: %health%
+      Gender: %gender%
+      Registered: %registered%
+      First played: %first_played%
+      Deaths: %deaths%
+      Level: %level%
+      Balance: %balance%
+      Coordinates: %coords%
+    translations:
+      online: 'Online'
+      offline: 'Offline'
+      not_set: 'Not set'
+      not_registered: 'Not registered'
+      offline_coords: 'Not available'
+      never: 'Never'
+  
+  # Новая команда для вывода списка команд
+  cmd_list:
+    enabled: true
+    response: |
+      <gradient:#0052CC:#45B6FE>Доступные команды:</gradient>
+      
+      <gradient:#4CAF50:#8BC34A>• /online, /онлайн</gradient> - показать список игроков онлайн
+      <gradient:#4CAF50:#8BC34A>• /tps, /тпс</gradient> - показать TPS сервера
+      <gradient:#4CAF50:#8BC34A>• /restart, /рестарт</gradient> - перезапустить сервер
+      <gradient:#4CAF50:#8BC34A>• /gender [man/girl], /пол [м/ж]</gradient> - установить свой пол
+      <gradient:#4CAF50:#8BC34A>• /player [nickname], /ник [никнейм]</gradient> - информация об игроке
+      <gradient:#4CAF50:#8BC34A>• /cmd, /команды</gradient> - показать список всех команд
+      <gradient:#4CAF50:#8BC34A>• /game [nickname], /игра [никнейм]</gradient> - сыграть в игру "Угадай слово"
+      
+      <gradient:#FF9800:#FFEB3B>Команды доступны только в следующих каналах:</gradient>
+      • Основной канал: все команды
+      • Канал для регистрации: только имя пользователя
+      • Консольный канал: любые серверные команды
+
+# Plugin settings
+plugin:
+  # Plugin prefix for in-game messages
+  prefix: '〔Телеграм〕'
+  # Telegram channel link for /telegram command
+  telegram-link: 'https://t.me/ReZoobastik'
+  # Сообщение при использовании команды /telegram в игре
+  telegram-command-message: '<gradient:#FF0000:#A6EB0F>〔Телеграм〕</gradient> <hover:show_text:"Кликни, чтобы открыть канал"><gradient:#A6EB0F:#00FF00>Присоединяйтесь к нашему Telegram каналу!</gradient></hover>' 

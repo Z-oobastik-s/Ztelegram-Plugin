@@ -1,0 +1,38 @@
+name: ZTelegram
+version: '${version}'
+main: org.zoobastiks.ztelegram.ZTele
+api-version: 1.16
+depend: [Vault]
+authors: [Zoobastiks]
+description: Telegram integration for Minecraft server
+
+commands:
+  telegram:
+    description: Main command for ZTelegram plugin
+    usage: |
+      §6Usage:
+      §e/telegram §7- Show Telegram channel link
+      §e/telegram help §7- Show help menu
+      §e/telegram reload §7- Reload the plugin
+      §e/telegram reload game §7- Reload only game configuration
+      §e/telegram unregister <player> §7- Unregister a player
+      §e/telegram addplayer [player] §7- Hide player from Telegram messages
+      §e/telegram removeplayer [player] §7- Show player in Telegram messages
+      §e/telegram addchannel <1|2|3> <chatId> §7- Update channel ID
+      §e/telegram hidden §7- List all hidden players
+    aliases: [tg]
+    permission: ztelegram.use
+
+permissions:
+  ztelegram.use:
+    description: Allow using basic /telegram command
+    default: true
+  ztelegram.admin:
+    description: Allow using admin commands (reload, addchannel)
+    default: op
+  ztelegram.unregister:
+    description: Allow unregistering players
+    default: op
+  ztelegram.hideshow:
+    description: Allow hiding/showing players in Telegram messages
+    default: true 
